@@ -128,60 +128,60 @@ alert( userName ); // *!*Ջոն*/!*, քանի որ արտաքին փոփոխակ
 ```
 
 ```smart header="Գլոբալ փոփոխականներ (Global variables)"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
+Ֆունկցիայից դուրս հայտարարված փոփոխականները՝ օրինակ `userName`֊ը վերևի օրինակում, կոչվում են *գլոբալ*։
 
-Global variables are visible from any function (unless shadowed by locals).
+Գլոբալ փոփոխականները տեսանելի են կամայական ֆունկցիայի ներսում (եթե իհարկե ֆունկցիայի ներսում չկա նույն անունով լոկալ փոփոխական)։
 
-It's a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+Ցանկալի է հնարավորինս քիչ օգտագործել գլոբալ փոփոխականներ։ Նոր ծրագրերը օգտագործում են շատ քիչ գլոբալ փոփոխականներ, կամ ընդհանրապես չեն օգտագործում։ Շատ փոփոխականներ հայտարարվում են այն ֆունկցիայում, որտեղ օգտագործվելու են։ Սակայն կան դեպքեր, որտեղ գլոբալ փոփոխականները կարող են օգտակար լինել՝ օրինակ պրոյեկտի մասշտաբով տվյալ պահելը։
 ```
 
-## Parameters
+## Պարամետրեր (Parameters)
 
-We can pass arbitrary data to functions using parameters.
+Մենք կարող ենք ֆունկցիային փոխանցել տվյալներ պարամետրերի միջոցով։
 
-In the example below, the function has two parameters: `from` and `text`.
+Ներքևի օրինակում ֆունկցիան ունի երկու պարամետր․ `from` և `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // parameters: from, text
+function showMessage(*!*from, text*/!*) { // պարամետրեր․ from, text
   alert(from + ': ' + text);
 }
 
-*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
-*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
+*!*showMessage('Աննա', 'Բարև');*/!* // Աննա: Բարև (*)
+*!*showMessage('Աննա', "Ինչպե՞ս ես");*/!* // Աննա: Ինչպե՞ս ես (**)
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
+Երբ ֆունկցիան կանչվում է `(*)` և `(**)` տողերում, նրան փոխանցած արժեքները պատճենահանվում են (copied) և դառնում `from` և `text`  լոկալ փոփոխականների արժեքները։ Այնուհետև ֆունկցիան օգտագործում է դրանք։
 
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
+Ահա մեկ այլ օրիանկ․ ունենք `from` փոփոխականը և փոխանցում ենք այն մեր ֆունկցիային։ Ուշադրություն դարձրեք, որ ֆունկցիան փոխում է `from`֊ի արժեքը, բայց դրսում նրա արժեքը մնում է նույնը, քանի որ ֆունկցիան միշտ ստանում է արժեքի պատճենը․
 
 ```js run
 function showMessage(from, text) {
 
 *!*
-  from = '*' + from + '*'; // make "from" look nicer
+  from = '*' + from + '*'; // ձևափոխում ենք "from"֊ը
 */!*
 
   alert( from + ': ' + text );
 }
 
-let from = "Ann";
+let from = "Աննա";
 
-showMessage(from, "Hello"); // *Ann*: Hello
+showMessage(from, "Բարև"); // *Աննա*: Բարև
 
-// the value of "from" is the same, the function modified a local copy
-alert( from ); // Ann
+// "from"֊ի արժեքը նույնն է, քանի որ ֆունկցիան փոփոխել է "from"֊ի լոկալ պատճենը
+alert( from ); // Աննա
 ```
 
-When a value is passed as a function parameter, it's also called an *argument*.
+Այն *արժեքը*, որը փոխանցվում է ֆունկցիային որպես պարամետր, կոչվում է *արգունեմտ*։
 
-In other words, to put these terms straight:
+Ամփոփելով տերմինները․
 
-- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term)
-- An argument is the value that is passed to the function when it is called (it's a call time term).
+- Պարամետրը դա փոփոխականն է, որը գրված է ֆունկցիայի հայտարարման ժամանակ դրա փակագծերի ներսում։
+- Արգումենտը դա արժեքն է, որը փոխանցվում է ֆունկցիային դրա կանչի ժամանակ։
 
-We declare functions listing their parameters, then call them passing arguments.
+Մենք սկզբում հայտարարում ենք ֆունկցիան թվարկելով դրա պարամետրերը փակագծերի մեջ, ապա կանչում այդ ֆունկցիան փոխանցելով համապատասխան արգումենտները։
 
-In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+Վերևի օրինակի համար կարող ենք ասել, որ `showMessage` ֆունկցիան հայտարարված է երկու պարամետրերով, ապա կանչվել երկու արգումենտներով՝ `from` և `"Hello"`։
 
 
 ## Default values
